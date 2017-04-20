@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<xs:schema
+  xmlns:xs xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+targetNamespace="my:Recette"
+xmlns="my:recette" elementFormDefault="qualified">
+
+<xsd:element name="Recette">
+  <xsd:complexType>
+    <xsd:sequence>
+      <xsd:element name="nom" type="xs:string"/>
+      <xsd:element name="description" type="xs:string"/>
+      <xsd:element name="notes">
+
+      </xsd:element><!-- FIN Notes -->
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element><!-- FIN recette -->
+
+</xsd:schema>

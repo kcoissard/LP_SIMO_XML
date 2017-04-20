@@ -1,0 +1,13 @@
+<xs:schema xmlns:xs= "http://wwww.w3org/2001/XMLSchema" targetNamespace="recette">
+
+  <!-- types -->
+  <xs:element name="recette" type="recette">
+    <xs:complexType name="Tnotes">
+      <xs:sequence>
+        <xs:element name="note" minOccurs="1" maxOccurs="unbounded" type="Tnote"/>
+        </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+<!-- correspond au note+ du dtd -->

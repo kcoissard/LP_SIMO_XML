@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<?xml-stylesheet type="text/xsl" role="stylesheet" href="recette.xsl"?>
+<!DOCTYPE recette SYSTEM "Recette.dtd">
+
+<recette xmlns="my:recette" id="gateau_aux_carottes" catégorie="dessert" calories="325">
+  <nom>Gâteau aux carottes</nom>
+  <description>
+    Un grand classique de la cuisine nord-américaine. Les carottes sont bon marché et on
+    en a toujours sous la main. Il reste frais et se gèle facilement.
+  </description>
+  <notes>
+    <note>Convient parfaitement pour un gâteau d'anniversaire.</note>
+    <note type="personnelle">Ma femme rajoute toujours un peu de vanille.</note>
+  </notes>
+  <liste_ingredients portions="16">
+    <ingredient quantité="4">oeufs</ingredient>
+    <ingredient unité="tasse" quantité="1">sucre granulé</ingredient>
+    <ingredient unité="tasse" quantité="1">huile végétale</ingredient>
+    <ingredient unité="tasse" quantité="2">farine tous usages</ingredient>
+    <ingredient unité="sachet" quantité="1.5">levure chimique</ingredient>
+    <ingredient unité="pincée" quantité="2">cannelle</ingredient>
+    <ingredient unité="unité" quantité="2">carottes</ingredient>
+    <ingredient unité="unité" quantité="1.5">pommes</ingredient>
+    <ingredient unité="tasse" quantité="2">raisins</ingredient>
+    <ingredient unité="tasse" quantité="1">amandes en morceaux</ingredient>
+  </liste_ingredients>
+  <preparation durée="90" cuisson="120">
+    <etape>
+      <alinea>Pelez et râpez finement les pommes et carottes.</alinea>
+    </etape>
+    <etape>
+      <alinea>Dans un gros bol, battre les oeufs jusqu'à ce qu'ils soient très légers et mousseux.</alinea>
+      <alinea>Ajouter le sucre graduellement en battant jusqu'à ce que le mélange soit léger.</alinea>
+      <alinea>Ajouter graduellement l'huile en brassant.</alinea>
+    </etape>
+    <etape>
+      <alinea>Tamiser ensemble la farine avec la poudre à pâte, le sel et la cannelle.</alinea>
+      <alinea>Ajouter lentement les oeufs au mélange.</alinea>
+      <alinea>Incorporer les carottes, les pommes, les raisins et les noix en brassant.</alinea>
+    </etape>
+    <etape>
+      <alinea>Étendre dans un moule carré de
+      <mesure quantité="15" unité="cm"/>
+      graissé et cuire dans un four préchauffé à
+      <mesure quantité="180" unité="degré"/>
+      pendant 1 ½ à 2 heures ou jusqu'à ce qu'un cure-dents inséré au centre du gâteau en ressorte propre.
+      </alinea>
+    </etape>
+    <etape>
+      <alinea>
+	Laisser refroidir dans le moule pendant 10 à 15 minutes, démouler et laisser refroidir complètement. Glacer avec un
+	<lien ref="glacage_fromage_creme.xml">Glaçage au fromage à la crème</lien>.
+      </alinea>
+    </etape>
+  </preparation>
+</recette>

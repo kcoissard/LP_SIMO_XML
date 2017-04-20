@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE recette SYSTEM "Recette.dtd">
+<recette catégorie="garniture" calories="130" id="glacage_fromage_creme">
+  <nom>Glaçage à la crème</nom>
+  <description>Glaçage pour diverses patisseries nord-américaines.</description>
+  <liste_ingredients portions="16">
+    <ingredient quantité="25" unité="cl">Crème fraiche épaisse</ingredient>
+    <ingredient quantité="1" unité="tasse">Beurre ramolli</ingredient>
+    <ingredient quantité="1.5" unité="pincée">Essence de vanille</ingredient>
+    <ingredient quantité="4" unité="tasse">Sucre glace</ingredient>
+  </liste_ingredients>
+  <preparation durée="15">
+    <etape>
+      <alinea>Battre la creme, le beurre et la vanille jusqu'à consistence lisse et onctueuse.</alinea>
+    </etape>
+    <etape>
+      <alinea>Ajouter graduellement le sucre à glacer en battant jusqu'à consistence de tartinade.</alinea>
+    </etape>
+  </preparation>
+</recette>

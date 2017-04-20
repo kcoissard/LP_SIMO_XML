@@ -1,0 +1,24 @@
+<!ELEMENT recette (nom, description, notes?, liste_ingredients, preparation)>
+<!ATTLIST recette catégorie (apéro | entrée | plat | dessert | rince-palais | garniture) #REQUIRED
+		id ID #REQUIRED
+		calories CDATA #IMPLIED>
+	<!ELEMENT nom (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+	<!ELEMENT notes (note+)>
+		<!ELEMENT note (#PCDATA)>
+		<!ATTLIST note type (personnelle | publique) #IMPLIED>
+	<!ELEMENT liste_ingredients (ingredient+)>
+		<!ELEMENT ingredient (#PCDATA)>
+		<!ATTLIST liste_ingredients portions CDATA #REQUIRED>
+			<!ATTLIST ingredient quantité CDATA #REQUIRED>
+			<!ATTLIST ingredient unité CDATA #IMPLIED>
+	<!ELEMENT preparation (etape+)>
+		<!ATTLIST preparation durée CDATA #REQUIRED>
+		<!ATTLIST preparation cuisson CDATA #IMPLIED>
+		<!ELEMENT etape (alinea+)>
+				<!ELEMENT alinea (#PCDATA|lien|mesure)*>
+					<!ELEMENT mesure EMPTY>
+							<!ATTLIST mesure 	quantité CDATA #REQUIRED
+																unité CDATA #REQUIRED>
+					<!ELEMENT lien (#PCDATA)>
+							<!ATTLIST lien 	ref CDATA #REQUIRED>

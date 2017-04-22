@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:r="my:countries" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:svg="http://www.w3.org/2000/svg">
+<xsl:output method="html" />
 
-<xsl:stylesheet version="1.0" xmlns:r="my:demographie" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-<xsl:template match="r:countries">
+  <xsl:template match="r:countries">
   <html>
     <head>
       <title>Countries</title>
@@ -15,17 +14,10 @@
     <body>
           <div id="left" class="stickynavbar">
             <nav class="navbar navbar-default sidebar" role="navigation">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                </div>
+              <div id="menu_listes" class="container-fluid">
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                   <ul class="nav navbar-nav">
+                    <li class="titre_page"><h2>Liste des pays</h2></li>
                     <li>
                       <a href="#anchorTop"><span class="glyphicon glyphicon-arrow-up"></span>  Remonter en haut
                       </a>
@@ -71,6 +63,13 @@
                   </ul>
                 </div>
               </div>
+              <div id="bouton_top10" class="container-fluid">
+                <a href="exo2.php" class="btn btn-info">Top 10 des pays les plus peuplés</a>
+              </div>
+              <div id="bouton_top_10_villes" class="container-fluid">
+                <a href="exo3.php" class="btn btn-info">Top 10 des villes</a>
+              </div>
+
             </nav>
           </div>
           <div id="right" class="infogenerales">
@@ -81,6 +80,11 @@
     </body>
   </html>
 </xsl:template>
+
+
+<!-- ZONE TEMPLATES -->
+<xsl:variable name="width" select="70" />
+<xsl:variable name="height" select="250" />
 
 
 <!-- LIEN MENU NAVIGATION PAYS -->
@@ -102,42 +106,67 @@
       <div class="panel-footer">
         <!-- partie langues -->
         <xsl:if test="r:language">
-          <div class="container-progress-bar-title">
-            <div class="progress">
-              <xsl:apply-templates select="r:language" mode="languesparlees"/>
-              <xsl:variable name="restePourcentage"><xsl:value-of select="100-sum(r:language/@percentage)"/></xsl:variable>
-              <xsl:if test="$restePourcentage>0">
-                <div class="reste-pourcentage-langage" role="progressbar"
-                  aria-valuenow="{$restePourcentage}" aria-valuemin="0" aria-valuemax="100" style="width:{$restePourcentage}%">
-                  <div class="language-title">Autres</div>
-                  <xsl:value-of select="$restePourcentage" />%
-                </div>
-              </xsl:if>
+          <div class="div_langues_cities">
+            <div class="container-progress-bar-title">
+              <p>Langues parlées :</p><br />
+              <div class="progress">
+                <xsl:apply-templates select="r:language" mode="languesparlees"/>
+                <xsl:variable name="restePourcentage"><xsl:value-of select="100-sum(r:language/@percentage)"/></xsl:variable>
+                <xsl:if test="$restePourcentage>0">
+                  <div class="reste-pourcentage-langage" role="progressbar"
+                    aria-valuenow="{$restePourcentage}" aria-valuemin="0" aria-valuemax="100" style="width:{$restePourcentage}%">
+                    <div class="language-title">Autres</div>
+                    <xsl:value-of select="$restePourcentage" />%
+                  </div>
+                </xsl:if>
+              </div>
             </div>
           </div>
         </xsl:if>
         <!-- villes svg -->
 
         <!-- liste villes -->
-        <xsl:if test="r:city">
-         <xsl:apply-templates select="r:city"/>
+        <xsl:if test="r:city" mode="list">
+          <div class="div_list_cities">
+            <xsl:apply-templates select="r:city" mode="list"/>
+          </div>
         </xsl:if>
 
-      </div>
+    <!-- graphe svg villes-->
+      <xsl:if test="r:city" mode="list">
+        <div class="div_graph_cities">
+          <svg width="{count(r:city) * $width + count(r:city) * 80}" height="{$height}">
+             <xsl:apply-templates select="r:city" mode="graph">
+               <xsl:sort select="r:population" order="descending" />
+             </xsl:apply-templates>
+             <line x1="0" y1="{$height div 2}" x2="{(count(r:city) * $width)*1.2}" y2="{$height div 2}" style="stroke:rgb(0,0,0);stroke-width:2" />
+          </svg>
+        </div>
+      </xsl:if>
+    </div>
   </div>
 </xsl:template>
 
 
 
 <!-- VILLES D'UN PAYS -->
-<xsl:template match="r:city">
-  <ul class="list-group">
-    <li class="list-group-item">
-      Ville : <xsl:apply-templates select="r:name"/> ---
-      Population : <xsl:apply-templates select="r:population"/>
-    </li>
-  </ul>
+<xsl:template match="r:city" mode="list">
+    <ul class="list-group">
+      <li class="list-group-item">
+        Ville : <xsl:apply-templates select="r:name"/> ---
+        Population : <xsl:apply-templates select="r:population"/>
+      </li>
+    </ul>
 </xsl:template>
+
+
+
+<xsl:template match="r:city" mode="graph">
+  <text x="{$width*1.1 * position() - ($width*1.5 div 2)}" y="{(($height div 2) - r:population * 100 div ../@population) - 10 }"><xsl:value-of select="format-number(r:population * 100 div ../@population,'0.##')" />%</text>
+  <rect x="{$width*1.1 * position() - $width}" y="{($height div 2) - r:population * 100 div ../@population }" width="{$width}" height="{r:population * 100 div ../@population }px" style="fill:orange;stroke-width:1;stroke:rgb(0,0,0)" />
+  <text x="{($height div 2)*1.1}" y="{position() * -($width*1.1) + ($width div 2)}" transform="rotate(90)" ><xsl:value-of select="r:name" /></text>
+</xsl:template>
+
 
 <!-- Nom d'une ville -->
 <xsl:template match="r:name">
@@ -161,7 +190,7 @@
 
 <!-- LANGAGES D'UN PAYS -->
 <xsl:template match="r:language" mode="languesparlees">
-    <div class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar"
+    <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"
       aria-valuenow="{@percentage}" aria-valuemin="0" aria-valuemax="100" style="width:{@percentage}%">
       <div class="language-title"><xsl:apply-templates /></div>
       <xsl:value-of select="@percentage"/>%
